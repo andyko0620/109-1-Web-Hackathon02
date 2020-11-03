@@ -26,21 +26,45 @@ class Sudoku extends Component {
         // TODO
 
         // Useful hints:
-        // console.log(row_index, col_index)
-        // console.log(this.state.selectedGrid)
+        this.setState({
+            selectedGrid: { row_index: row_index, col_index: col_index}
+        })
+         console.log(row_index, col_index)
+         console.log(this.state.selectedGrid)
     }
 
     handleKeyDownEvent = (event) => {
         // TODO
-
-        // Useful hints:
+        const {gridValues,selectedGrid} = this.state;
+        
+        // // Useful hints:
         // console.log(event)
-        // if (this.state.gridValues !== null && this.state.selectedGrid.row_index !== -1 && this.state.selectedGrid.col_index !== -1 && (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {}
+        // if(selectedGrid.col_index!==-1 && selectedGrid.row_index!==-1){
+        //     console.log(gridValues[selectedGrid.col_index][selectedGrid.row_index])
+        // }
+        //console.log(gridValues[selectedGrid.col_index][selectedGrid.row_index])
+        // if (this.state.gridValues !== null && this.state.selectedGrid.row_index !== -1 && this.state.selectedGrid.col_index !== -1 
+        //     && (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+        //         this.setState(({gridValues }) => ({ gridValues: 
+        //             gridValues.map((row, i) => {
+        //               row.map((grid, j) => {
+        //                 if (i === this.state.selectedGrid.row_index && j === this.state.selectedGri.col_index) {
+        //                   return event.target.value;
+        //                 } else {
+        //                   return grid;
+        //                 }
+        //               });
+        //             })
+        //           }));
+        //     }
         // if (this.state.problem.content[this.state.selectedGrid.row_index][this.state.selectedGrid.col_index] === "0") {}
     }
 
     handleScreenKeyboardInput = (num) => {
         // TODO
+        // this.setState({
+        //     gridValues: num
+        // })
     }
 
     componentDidMount = () => {
@@ -95,6 +119,7 @@ class Sudoku extends Component {
                         <div className="row">
                             <Grid_9x9 row_offset={0} col_offset={0}
                                 handle_grid_1x1_click={this.handle_grid_1x1_click}
+                                
                                 value={this.extractArray(this.state.gridValues, 0, 0)}
                                 fixedValue={this.extractArray(this.state.problem.content, 0, 0)}
                                 selectedGrid={this.state.selectedGrid}
