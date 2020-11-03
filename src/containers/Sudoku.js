@@ -24,13 +24,16 @@ class Sudoku extends Component {
 
     handle_grid_1x1_click = (row_index, col_index) => {
         // TODO
-
+        const {gridValues,selectedGrid} = this.state;
         // Useful hints:
         this.setState({
             selectedGrid: { row_index: row_index, col_index: col_index}
         })
          console.log(row_index, col_index)
-         console.log(this.state.selectedGrid)
+         console.log(this.state.selectedGrid.row_index)
+         console.log(this.state.selectedGrid.row_index)
+         if(this.state.selectedGrid.col_index!==-1 && this.state.selectedGrid.row_index!==-1)
+         console.log(gridValues[this.state.selectedGrid.row_index][this.state.selectedGrid.row_index])
     }
 
     handleKeyDownEvent = (event) => {
@@ -43,20 +46,15 @@ class Sudoku extends Component {
         //     console.log(gridValues[selectedGrid.col_index][selectedGrid.row_index])
         // }
         //console.log(gridValues[selectedGrid.col_index][selectedGrid.row_index])
-        // if (this.state.gridValues !== null && this.state.selectedGrid.row_index !== -1 && this.state.selectedGrid.col_index !== -1 
-        //     && (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
-        //         this.setState(({gridValues }) => ({ gridValues: 
-        //             gridValues.map((row, i) => {
-        //               row.map((grid, j) => {
-        //                 if (i === this.state.selectedGrid.row_index && j === this.state.selectedGri.col_index) {
-        //                   return event.target.value;
-        //                 } else {
-        //                   return grid;
-        //                 }
-        //               });
-        //             })
-        //           }));
-        //     }
+        if (this.state.gridValues !== null && this.state.selectedGrid.row_index !== -1 && this.state.selectedGrid.col_index !== -1 
+            && (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+               let array=this.state.gridValues;
+               let row=this.state.selectedGrid.row_index,col=this.state.selectedGrid.col_index;
+               array[row][col]=event.keyCode-48;
+               this.setState({
+                   gridValues: array
+               })
+            }
         // if (this.state.problem.content[this.state.selectedGrid.row_index][this.state.selectedGrid.col_index] === "0") {}
     }
 
@@ -65,6 +63,12 @@ class Sudoku extends Component {
         // this.setState({
         //     gridValues: num
         // })
+        let array=this.state.gridValues;
+        let row=this.state.selectedGrid.row_index,col=this.state.selectedGrid.col_index;
+        array[row][col]=num;
+        this.setState({
+            gridValues: array
+        })
     }
 
     componentDidMount = () => {
